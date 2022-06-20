@@ -2,7 +2,9 @@
 
 Connect to the frontend
 
-``` ssh adrianodif@recas.ba.infn.it```
+```bash 
+ssh adrianodif@recas.ba.infn.it
+```
 
 and in the terminal just use
 
@@ -22,7 +24,7 @@ by running conda init? [yes|no]
 
 answer `yes`. This will create an automatic configuration in the ~/.bashrc file that will launch miniconda whenever you will login again. Sincerely, I don’t like it so what I do is wrapping this piece of script in ~/.bashrc in a function I can call whenever I want
 
-```
+```bash
 function miniconda_setup()
 {
 __conda_setup="$('/lustre/home/adrianodif/Tools/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -45,19 +47,19 @@ the `__conda_setup` part will be already there, just wrap it in a function.
 
 Now open a new connection to the frontend and use
 
-```
+```bash
 miniconda_setup 
 ```
 
 from now on you will see this in your shell
 
-```
+```bash
 (base) [adrianodif@ui03 ~]$ 
 ```
 
 that means that your conda *base* environment is active. Just to be safe run
 
-```
+```bash
 conda update -n base -c defaults conda
 ```
 
@@ -65,25 +67,25 @@ to update conda to the latest conda version.
 
 Let’s now create a new environment
 
-```
+```bash
 conda create -n new python=3
 ```
 
 And you can activate it with
 
-```
+```bash
 conda activate new
 ```
 
 You can check all the environments you have created wiht
 
-```
+```bash
 conda env list
 ```
 
 To get out of an environment use 
 
-```
+```bash
 conda deactivate
 ```
 
@@ -91,7 +93,7 @@ If you do it in your base environment this will exit conda.
 
 In your new environment let install jupyter-notebooks
 
-```
+```bash
 conda install jupyter
 ```
 
@@ -99,13 +101,13 @@ conda install jupyter
 
 On the frontend (`ui02` or `ui03`) open an interactive connection with an HPC machine (note this command will be updated with the `condor_q` new one, this anyway work for the moment) :
 
-```
+```bash
 qsub -q testqueue -I -l ncpus=N
 ```
 
 With `N` the number of CPUs you want. E.g., I’ve had acess to `hpc-gpu-1-4-1 
 
-```
+```bash
 [adrianodif@hpc-gpu-1-4-1 ~]$ 
 ```
 
@@ -115,14 +117,14 @@ conda activate new
 
 If it is your first time with a notebook in Recas use
 
-```
+```bash
 jupyter notebook --generate-config
 jupyter notebook password
 ```
 to generate a password. 
 
 Then run:
-```
+```bash
 jupyter notebook --no-browser --port=8000
 ```
 
@@ -131,13 +133,13 @@ note that if the port is not available jupyter will warn you that it has moved t
 ## SSH Tunneling to HPC machine
 
 So on a new terminal you need to access the frontend and open a tunnel from the frontend to that machine:
-```
+```bash
 ssh -N -f -L localhost:2812:localhost:8000 hpc-gpu-1-4-1
 ```
 In this case since the frontend is quite crowded try to use an unique numeber (e.g. your birthday as I did here).  If the port is not free ssh will warn you and you will have to change it. This step is needed since the machines on the HPC are not reacheable directly but only through the ui02/ui03 bastions.
 
 Last step. On you local machine open a terminal and ope a tunnel to the frontend
-```
+```bash
 ssh -L 2812:localhost:2812 -N -f ui03.recas.ba.infn.it
 ```
 Note that you have to adjust ui02 or ui03 depending on the frontend machine you ended up.
