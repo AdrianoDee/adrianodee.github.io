@@ -77,7 +77,7 @@ And you can activate it with
 conda activate new
 ```
 
-You can check all the environments you have created wiht
+You can check all the environments you have created with
 
 ```bash
 conda env list
@@ -112,8 +112,11 @@ With `N` the number of CPUs you want. E.g., I’ve had acess to `hpc-gpu-1-4-1
 ```
 
 And I start my notebeook here.
+
+```bash
 miniconda_setup
 conda activate new
+```
 
 If it is your first time with a notebook in Recas use
 
@@ -138,7 +141,7 @@ ssh -N -f -L localhost:2812:localhost:8000 hpc-gpu-1-4-1
 ```
 In this case since the frontend is quite crowded try to use an unique numeber (e.g. your birthday as I did here).  If the port is not free ssh will warn you and you will have to change it. This step is needed since the machines on the HPC are not reacheable directly but only through the ui02/ui03 bastions.
 
-Last step. On you local machine open a terminal and ope a tunnel to the frontend
+Last step. On you local machine open a terminal and open a tunnel to the frontend
 ```bash
 ssh -L 2812:localhost:2812 -N -f adrianodif@ui03.recas.ba.infn.it
 ```
