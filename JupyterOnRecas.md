@@ -27,14 +27,14 @@ answer `yes`. This will create an automatic configuration in the ~/.bashrc file 
 ```bash
 function miniconda_setup()
 {
-__conda_setup="$('/lustre/home/adrianodif/Tools/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/lustre/home/adrianodif/Tools/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)" #this path is the one you chose, will be written automatically by miniconda installer
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/lustre/home/adrianodif/Tools/miniconda3/etc/profile.d/conda.sh" ]; then
+    if [ -f "/lustre/home/adrianodif/Tools/miniconda3/etc/profile.d/conda.sh" ]; then 
         . "/lustre/home/adrianodif/Tools/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/lustre/home/adrianodif/Tools/miniconda3/bin:$PATH"
+        export PATH="/lustre/home/adrianodif/Tools/miniconda3/bin:$PATH" 
     fi
 fi
 unset __conda_setup
@@ -140,7 +140,7 @@ In this case since the frontend is quite crowded try to use an unique numeber (e
 
 Last step. On you local machine open a terminal and ope a tunnel to the frontend
 ```bash
-ssh -L 2812:localhost:2812 -N -f ui03.recas.ba.infn.it
+ssh -L 2812:localhost:2812 -N -f adrianodif@ui03.recas.ba.infn.it
 ```
 Note that you have to adjust ui02 or ui03 depending on the frontend machine you ended up.
 
