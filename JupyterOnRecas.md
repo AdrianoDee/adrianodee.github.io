@@ -99,7 +99,7 @@ conda install jupyter
 
 ## Notebook on the HPC machines
 
-On the frontend (`ui02` or `ui03`) open an interactive connection with an HPC machine we need to use `condor_submit`. For a comprehensive guide to HTCondor see [here]([url](https://htcondor.readthedocs.io/en/latest/users-manual/submitting-a-job.html#)). Write in a plain file with:
+On the frontend (`ui02` or `ui03`) open an interactive connection with an HPC machine we need to use `condor_submit`. For a comprehensive guide to HTCondor see [here](https://htcondor.readthedocs.io/en/latest/users-manual/submitting-a-job.html#). Write in a plain file with:
 
 ```bash
 output=out #output of your job will be written here
