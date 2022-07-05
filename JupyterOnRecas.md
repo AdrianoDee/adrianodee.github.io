@@ -99,16 +99,44 @@ conda install jupyter
 
 ## Notebook on the HPC machines
 
-On the frontend (`ui02` or `ui03`) open an interactive connection with an HPC machine (note this command will be updated with the `condor_q` new one, this anyway work for the moment) :
+On the frontend (`ui02` or `ui03`) open an interactive connection with an HPC machine we need to use `condor_submit`. For a comprehensive guide to HTCondor see [here]([url](https://htcondor.readthedocs.io/en/latest/users-manual/submitting-a-job.html#)). Write in a plain file with:
 
 ```bash
-qsub -q testqueue -I -l ncpus=N
+output=out #output of your job will be written here
+error=err #errors 
+log=log #log of condor_submit
+
+request_cpus=1
+request_memory=4096 #in MB
+
+rank=Memory
+queue
 ```
 
-With `N` the number of CPUs you want. E.g., I’ve had acess to `hpc-gpu-1-4-1 
+you can easily do it with `echo`:
 
 ```bash
-[adrianodif@hpc-gpu-1-4-1 ~]$ 
+echo "output=out
+error=err
+log=log
+
+request_cpus=1
+request_memory=4096 
+
+rank=Memory
+queue" > job
+```
+
+Then use `condor_submit` to send the job with `-interactive` to do have the shell accessible interactively.
+
+```bash
+condor_submit job -interactive
+```
+
+This will let you in a machine with a GPU, 1 CPU reserved to you and 4096MB of memory. E.g., I’ve had acess to `wn-gpu-8-3-22`
+
+```bash
+[adrianodif@wn-gpu-8-3-22 ~]$ 
 ```
 
 And I start my notebeook here.
