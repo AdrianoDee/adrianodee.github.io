@@ -1,6 +1,10 @@
+## Tracking for BPH
+
+Here I'm collecting some pointers, instructions, suggestions about tracking that could be useful for BPH analysis. 
+
 ### Track covariance issuee fix
 
-The credits of this goes to Tony and Olmo. To cope with the not positive defined covariance matrix errors found in miniAODs, The fix is to be applied on the recotracks that you want to use in the vertexing.
+The credits of this goes to Tony and Olmo. To cope with the not positive defined covariance matrix errors found in miniAODs, The fix is to be applied on the recotracks that you want to use in the vertexing. The idea is to subtract the minimum eigenvalue from the diagonal if that is negative and to add a positive delta to it (could be ~0).
 
 ```C
 reco::Track fix_track(const reco::Track *tk, double delta)
@@ -29,4 +33,34 @@ return reco::Track(tk->chi2(), tk->ndof(), tk->referencePoint(), tk->momentum(),
 
 ```
 
-with delta that may be set by default to `1e-8`.  
+with delta that may be set by default to `1e-8`. So using this as:
+
+```C
+auto fixedTrack = fix_track(candidate->bestTrack());
+```
+the `fixedTrack` will have the covariance defined positive.
+
+-------
+### Misalignment Systematics
+
+Thanks to Sara for these instructions and documentation.
+
+To estimate the systematics due to tracker misalignment have a look at an example here:
+
+https://cms.cern.ch/iCMS/jsp/db_notes/noteInfo.jsp?cmsnoteid=CMS%20AN-2015/110
+(in sec. 3.8.5)
+
+This was Run1, and follows the procedure described here
+
+https://twiki.cern.ch/twiki/bin/view/CMS/SystematicMisalignmentsofTracker
+
+Which is still valid. The idea is to 
+
+- have new GTs with alignments different from the standard ones.
+- re run the MC reco with new tags (that includes misalign)
+- use the misaligned MC to redo the analysis and use the variation as an estimation of systematics.
+
+See also a presentation from Sara at the TRK DPG that may be useful.
+
+https://indico.cern.ch/event/787662/contributions/3361558/attachments/1815095/2966246/tkalignment_in_bph.pdf
+
