@@ -1,6 +1,6 @@
-##Notes
+## Notes
 
-###Templated products naming
+### Templated products naming
 
 ```C
 
