@@ -189,3 +189,10 @@ Insert the password you have set above. And you are all set:
 
 Note that the folder on which you will navigate is the one in which you started the notebook.
 
+### Install GooFit
+
+To install [`GooFit`](https://github.com/GooFit/GooFit) (with `CUDA` support) on ReCas GPU equipped machines simply use `conda` with
+
+``` conda install goofit goofit-proc=*=gpu cudatoolkit=10.0 ```
+
+where `cudatoolkit=10.0` forcing is needed since on most machines only `CUDA > 11.*` is installed and `GooFit` does not support it. 
