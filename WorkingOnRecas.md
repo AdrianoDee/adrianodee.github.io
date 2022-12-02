@@ -189,7 +189,7 @@ Insert the password you have set above. And you are all set:
 
 Note that the folder on which you will navigate is the one in which you started the notebook.
 
-### Install GooFit
+## Install GooFit
 
 To install [`GooFit`](https://github.com/GooFit/GooFit) (with `CUDA` support) on ReCas GPU equipped machines simply use `conda` with
 
